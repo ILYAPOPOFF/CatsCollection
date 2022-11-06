@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension UIView {
+extension UICollectionView {
     
     func pin(to superView: UIView) {
         translatesAutoresizingMaskIntoConstraints = false

@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+struct Menu {
+    var image: String?
+    var firstLabel: String?
+    var secondLabel: String?
+}
