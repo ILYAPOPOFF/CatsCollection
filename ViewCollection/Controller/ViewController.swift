@@ -9,14 +9,17 @@ import UIKit
 
 class ViewController: UIViewController {
     
+
     let collectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 16
-        layout.minimumInteritemSpacing = 16
+        layout.minimumInteritemSpacing = 0
+        layout.sectionInset.left = 16
+        layout.sectionInset.right = 16
         
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        cv.register(MyCustomCell.self, forCellWithReuseIdentifier: "cell")
         cv.backgroundColor = .white
         return cv
     }()
@@ -24,6 +27,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = .white
         title = "Cats"
         
         setupView()
@@ -54,16 +58,18 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MyCustomCell
         cell.backgroundColor = .white
         cell.layer.borderWidth = 1
         cell.layer.borderColor = #colorLiteral(red: 0.8745098039, green: 0.8745098039, blue: 0.8745098039, alpha: 1)
         cell.layer.cornerRadius = 16
+        cell.translatesAutoresizingMaskIntoConstraints = false
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var width: CGFloat = collectionView.frame.width/2 - 10
+        var width: CGFloat = collectionView.frame.width/2 - 24
+
         return CGSize(width: width, height: width * 1.5)
     }
     
